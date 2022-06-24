@@ -4,19 +4,18 @@ const decimalBtn = document.querySelector('.btn');
 const result = document.getElementById('resultToDecimal');
 
 decimalBtn.addEventListener('click', () => {
-    console.log('click happening');
-    let totalDecimal = 0;
     const getValue = inputValue.value;
-    const makeItArr = getValue
-        .split('')
-        .reverse()
-        .forEach((element, index) => {
-            if (element === '0' || element === '1') {
-                const calcBinary = element * 2 ** index;
-                totalDecimal += calcBinary;
-                result.textContent = totalDecimal;
-            } else {
-                result.textContent = 'Please enter 1 or 0 characters';
-            }
-        });
+    let totalDecimal = 0;
+    if (!getValue.match(/^[0-1]+$/)) {
+        result.innerHTML = `<h2>Please enter valid character 0 or 1</h2>`;
+        return;
+    } else {
+        getValue
+            .split('')
+            .reverse()
+            .map((element, index) => {
+                totalDecimal += element * Math.pow(2, index);
+                result.innerHTML = `<h2>Total: ${totalDecimal}</h2>`;
+            });
+    }
 });
