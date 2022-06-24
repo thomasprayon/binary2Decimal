@@ -3,7 +3,7 @@ const inputValue = document.getElementById('binaryToDecimal');
 const decimalBtn = document.querySelector('.btn');
 const result = document.getElementById('resultToDecimal');
 
-decimalBtn.addEventListener('click', () => {
+const returnDecimal = function () {
     const getValue = inputValue.value;
     let totalDecimal = 0;
     result.classList.remove('error-message');
@@ -20,4 +20,12 @@ decimalBtn.addEventListener('click', () => {
                 result.innerHTML = `<h2 class="total">Total: ${totalDecimal}</h2>`;
             });
     }
+};
+
+window.document.addEventListener('keydown', e => {
+    e.keyCode === 13
+        ? returnDecimal()
+        : console.log('Something wrong happened!');
 });
+
+decimalBtn.addEventListener('click', returnDecimal);
